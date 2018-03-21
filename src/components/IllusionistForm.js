@@ -53,7 +53,7 @@ class IllusionistForm extends Component {
         if (this.state.currentSalutation.length > 0) {
             letter = this.shiftSalutation();
         } else {
-            this.setState({ salutation: this.getRandomSalutation() });
+            this.setState({ currentSalutation: this.getRandomSalutation() });
         }
         return letter;
     }
@@ -71,10 +71,10 @@ class IllusionistForm extends Component {
     }
 
     handleKeyUp = (event) => {
-        if ([ 'Shift', 'Control' ].indexOf(event.key) !== -1) {
+        if ([ 'Dead', 'Shift', 'Control', 'ArrowLeft', 'ArrowRight' ].indexOf(event.key) !== -1) {
             return;
         } else if (event.key === ';') {
-    		this.setState({ isPretending: !this.state.isPretending });
+            this.setState({ isPretending: !this.state.isPretending });
             this.setState({ question: this.state.questionBkp + this.getFakeLetter() });
         } else if (this.state.isPretending) {
             this.setState({ question: this.state.questionBkp });
@@ -92,8 +92,11 @@ class IllusionistForm extends Component {
     }
 
     handleSubmit = (event) => {
-      alert(this.state.answer);
-      event.preventDefault();
+        this.setState({ question: '' });
+        alert(this.state.answer);
+        this.setState({ answer: '' });
+        this.setState({ currentSalutation: this.getRandomSalutation() })
+        event.preventDefault();
     }
 
   render() {
@@ -102,6 +105,7 @@ class IllusionistForm extends Component {
         <label>
             Pergunta:
             <input
+                className="question"
                 type="text"
                 value={this.state.question}
                 onKeyUp={this.handleKeyUp}
