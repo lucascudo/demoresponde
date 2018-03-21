@@ -71,7 +71,20 @@ class IllusionistForm extends Component {
     }
 
     handleKeyUp = (event) => {
-        if ([ 'Dead', 'Shift', 'Control', 'ArrowLeft', 'ArrowRight' ].indexOf(event.key) !== -1) {
+        const keysToIgnore = [
+            'Fn',
+            'Alt',
+            'Clear',
+            'Dead',
+            'Shift',
+            'Control',
+            'Delete',
+            'CapsLock',
+            'NumLock',
+            'ArrowLeft',
+            'ArrowRight',
+        ];
+        if (keysToIgnore.indexOf(event.key) !== -1) {
             return;
         } else if (event.key === ';') {
             this.setState({ isPretending: !this.state.isPretending });
@@ -84,10 +97,11 @@ class IllusionistForm extends Component {
                 this.setState({ answer: this.state.answer + event.key });
                 this.setState({ question: this.state.question + this.getFakeLetter() });
             }
-    	} else if (event.key === 'Backspace') {
-            this.setState({ question: this.state.question.substring(0, this.state.question.length - 1) });
-        } else {
-            this.setState({ question: this.state.question + event.key });
+    	} else {
+            this.setState({ question: (event.key === 'Backspace') ?
+                this.state.question.substring(0, this.state.question.length - 1) :
+                this.state.question + event.key
+            });
         }
     }
 
