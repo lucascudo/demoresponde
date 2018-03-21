@@ -1,16 +1,15 @@
 # Demoresponde
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-## Installing dependencies
+## Installing
 
-Run `npm install && bower install`
+`npm install`
 
-## Build & development
+## Running
 
-Run `grunt` for building and `grunt serve` for preview.
+`npm start`
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+`npm test`
